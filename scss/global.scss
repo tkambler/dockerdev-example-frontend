@@ -1,0 +1,34 @@
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    cursor: pointer;
+}
+
+textarea {
+    resize: none;
+}
+
+#root {
+    
+    height: 100%;
+    padding-top: 15px;
+    
+    #route-container {
+        height: 100%;
+    }
+    
+    .route {
+        height: 100%;
+    }
+    
+}
