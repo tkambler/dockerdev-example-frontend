@@ -1,12 +1,42 @@
 FROM mhart/alpine-node:8.11.3
 
-ENV NODE_PATH ./lib
+ENV NODE_NO_HTTP2=1
+ENV BLUEBIRD_W_FORGOTTEN_RETURN=0
 
-RUN apk update && apk add \
+RUN yarn global add \
+    webpack \
+    webpack-cli \
+    grunt-cli
+
+RUN apk update && apk upgrade && \
+    apk add bash \
+    coreutils \
+    tar \
+    make \
+    gcc \
+    g++ \
+    python \
+    ruby-dev \
+    build-base \
+    ruby \
+    ruby-io-console \
+    ruby-bundler \
+    libffi-dev \
+    libpng-dev \
+    autoconf \
     git \
-    openssh-client
+    openssh-client \
+    less
     
-RUN npm i -g grunt-cli
+RUN rm -rf /var/cache/apk/*
+RUN gem install sass compass --no-ri --no-rdoc
+RUN apk del build-base libffi-dev ruby-dev
+RUN yarn global add whybundled
+RUN yarn cache clean --force
+
+ENV TERM=xterm
+ENV NODE_PATH=./lib
+ENV NODE_ENV=development
 
 COPY package.json package-lock.json? .npmrc? /opt/app/
 
