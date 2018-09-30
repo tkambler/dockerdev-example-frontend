@@ -6,14 +6,13 @@ RUN apk update && apk add \
     git \
     openssh-client
 
-RUN yarn global add \
-    nodemon
+RUN npm i -g nodemon
 
-COPY package.json yarn.lock? .npmrc? /opt/app/
+COPY package.json package-lock.json? .npmrc? /opt/app/
 
 WORKDIR /opt/app
 
-RUN yarn
+RUN npm i
 
 COPY . /opt/app/
 
